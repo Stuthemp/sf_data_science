@@ -34,19 +34,21 @@ def binary_predict(number: int = 1) -> int:
     """
     count = 0
     possible_answers = list(range(1, 101))
-    min = 0
-    max = 100
-    mid = 0
+    min = 1 #Минимально возможное число
+    max = 100 #Максимально возможное число
+    mid = 0 #Средний элемент множества возможных чисел
     
     while min <= max:
         count += 1
         mid = (max + min) // 2
  
         if possible_answers[mid] < number:
-            min = mid + 1
+            min = mid + 1 # Если предсказанное число оказалось меньше загаданного,
+                            # Изменяем минимально возможное в зависимости от последнего предположения
  
         elif possible_answers[mid] > number:
-            max = mid - 1
+            max = mid - 1 # Если предсказанное число оказалось больше загаданного,
+                            # Изменяем максимально возможное в зависимости от последнего предположения
  
         else:
             break
@@ -63,7 +65,7 @@ def score_game(random_predict) -> int:
         int: среднее количество попыток
     """
     count_ls = []
-    #np.random.seed(1)  # фиксируем сид для воспроизводимости
+    np.random.seed(1)  # фиксируем сид для воспроизводимости
     random_array = np.random.randint(1, 101, size=(1000))  # загадали список чисел
 
     for number in random_array:
